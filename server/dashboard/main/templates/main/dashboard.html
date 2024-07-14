@@ -1,0 +1,51 @@
+{% extends 'main/home.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>customer Dashboard</title>
+</head>
+<body>
+    <h1>Customer Dashboard</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>LinkedIn</th>
+                <th>Social Media</th>
+                <th>Description</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>File</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for customer in customers %}
+                <tr>
+                    <td>{{ customer.customer_id }}</td>
+                    <td>{{ customer.customer_name }}</td>
+                    <td>{{ customer.get_customer_category_display }}</td>
+                    <td><a href="{{ customer.socialmedia_link }}">{{ customer.socialmedia_link  }}</a></td>
+                    <td><a href="{{ customer.website_link }}">{{ customer.website_link}}</a></td>
+                    <td>{{ customer.description }}</td>
+                    <td>{{ customer.phone_number }}</td>
+                    <td>{{ customer.email }}</td>
+                    <td>
+                        {% if customer.file_upload %}
+                            <a href="{{ customer.file_upload.url }}">Download</a>
+                        {% else %}
+                            No file uploaded
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+
+{% endblock %}
